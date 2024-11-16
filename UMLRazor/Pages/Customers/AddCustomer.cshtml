@@ -1,0 +1,24 @@
+﻿@page
+@model UMLRazor.Pages.Customers.AddCustomerModel
+@{
+    ViewData["Title"] = "Add Customer";
+}
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="@Model.Customer.Name" class="control-label"></label>
+        <input asp-for="@Model.Customer.Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Customer.Mobile" class="control-label"></label>
+        <input asp-for="@Model.Customer.Mobile" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Customer.Address" class="control-label"></label>
+        <input asp-for="@Model.Customer.Address" class="form-control" />
+    </div>
+    <div class="formgroup">
+        <label asp-for="@Model.Customer.Name" class="control-label"></label>
+        <input type="submit" value="Create Customer" class="btn btn-primary" />
+    </div>
+</form>

@@ -1,0 +1,36 @@
+﻿@page
+@using PizzaLibrary.Models
+@model UMLRazor.Pages.Customers.ShowCustomersModel
+@{
+    ViewData["Title"] = "ShowCustomers";
+}
+<h1>Numbers of Customers @Model.Customers.Count</h1>
+<p>
+    <a asp-page="AddCustomer">Add New Customer</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Mobile</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Customer item in Model.Customers)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Address</td>
+                <td>@item.Mobile</td>
+                <td><a asp-page="EditCustomer" asp-route-id="@item.Id">Edit</a></td>
+                <td><a asp-page="DeleteCustomer" asp-route-deleteMobile="@item.Mobile">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
