@@ -76,13 +76,14 @@ namespace PizzaLibrary.Services
             }
             return clubList;
         }
-        public void EditCustomer(Customer customer)
+        public void UpdateCustomer(Customer customer)
         {
-            if (_customers.ContainsKey(customer.Mobile))
+            if (customer != null && _customers.ContainsKey(customer.Mobile))
             {
                 _customers[customer.Mobile] = customer;
             }
         }
+    
         public void RemoveCustomer(string mobile)
         {
            _customers.Remove(mobile);
@@ -92,6 +93,16 @@ namespace PizzaLibrary.Services
         {
             //TODO is this nessecary, what does it do?
             return base.ToString();
+        }
+        public Customer? GetCustomerById(int id)
+        {
+            foreach (var cus in _customers.Values)
+            {
+                if (cus.Id == id)
+                    return cus;
+            }
+            return null;
+
         }
     }
 }

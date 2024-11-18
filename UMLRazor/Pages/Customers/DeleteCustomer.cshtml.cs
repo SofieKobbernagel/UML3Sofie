@@ -1,3 +1,4 @@
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaLibrary.Interfaces;
@@ -21,6 +22,7 @@ namespace UMLRazor.Pages.Customers
         {
             Customer = _repo.GetCustomerByMobile(deleteMobile);
         }
+
         public IActionResult OnPost()
         {
             _repo.RemoveCustomer(Customer.Mobile);

@@ -12,7 +12,11 @@ else
 VIPCustomer vip = new VIPCustomer("Susanne", "40908090", "vejvej 69", 15);
 Console.WriteLine(vip.ToString());
 
-Beverage øl = new Beverage(true);
+Beverage øl = new Beverage("Øl",30,"Carlsberg",MenuType.TILBEHØR,true);
+Console.WriteLine(øl.ToString());
+Beverage cola = new Beverage("Cola",25,"Coca-Cola",MenuType.TILBEHØR,false);
+Console.WriteLine(cola.ToString());
+  
 
 UserMenu menu = new UserMenu();
 //menu.ShowMenu();

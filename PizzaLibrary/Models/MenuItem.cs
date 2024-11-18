@@ -17,21 +17,25 @@ namespace PizzaLibrary.Models
         public double Price { get; set; }
         public MenuType TheMenuType { get; set; }
 
+        public MenuItem(string name, double price, string description, MenuType menuType)
+        {
+            Name = name;
+            Description = description;
+            Price = price;
+            TheMenuType = menuType;
+            No = _itemCounter;
+            _itemCounter++;
+        }
+
         public MenuItem()
         {
             
         }
-
-        public MenuItem(string name, double price, string description, MenuType menuType) 
+        public override string ToString()
         {
-            Name = name;
-            Description = description;
-            Price = price;  
-            TheMenuType = menuType;
-            No=_itemCounter;
-            _itemCounter++;
-        }   
+            return $"{Name}";
+        }
 
-        
+
     }
 }
