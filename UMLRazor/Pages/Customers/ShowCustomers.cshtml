@@ -4,11 +4,17 @@
 @{
     ViewData["Title"] = "ShowCustomers";
 }
-<h1>Numbers of Customers @Model.Customers.Count</h1>
+@*Viser et h1-element, der viser antallet af kunder. 
+Dette opnås ved at bruge @Model.Customers.Count, 
+hvor Model.Customers er listen over kunder hentet fra backend.*@
+<h1>Number of customers  @Model.Customers.Count </h1>
+
+@*Skaber et link, som sender brugeren videre til siden "AddCustomer", hvor en ny kunde kan blive tilføjet.*@
 <p>
-    <a asp-page="AddCustomer">Add New Customer</a>
+    <a asp-page="AddCustomer" >Add New Customer</a>
 </p>
 
+@*Opretter en tabel, som viser oplysninger om alle kunder. Tabelhovedet (<thead>) indeholder kolonneoverskrifter som ID, navn, adresse, mobilnummer og billede.*@
 <table class="table">
     <thead>
         <tr>
@@ -16,8 +22,12 @@
             <th>Name</th>
             <th>Address</th>
             <th>Mobile</th>
+            <th>Image</th>
+          
         </tr>
     </thead>
+    @*Dynamisk indhold: Ved hjælp af @foreach-loopet itereres gennem alle kunder i Model.Customers. 
+    For hver kunde oprettes en ny række (<tr>) med data om kunden i celler (<td>).*@
     <tbody>
         @foreach (Customer item in Model.Customers)
         {
@@ -26,11 +36,18 @@
                 <td>@item.Name</td>
                 <td>@item.Address</td>
                 <td>@item.Mobile</td>
+                @*Billede: For hver kunde vises et billede (hvis der er et tilknyttet billede) 
+                 Dette billede vises som en rund figur med en størrelse på 80x70 pixels.*@
+                <td>
+                    <img src="~/images/customerImages/@item.CustomerImage" class="rounded-circle" width="80" height="70" />
+                </td>
+
+                @*Rediger og Slet Links: For hver kunde er der links til at redigere og slette kunden. 
+                Linksene bruger asp-page til at navigere til de relevante sider (EditCustomer og DeleteCustomer), 
+                og de sender kundens ID eller mobilnummer som URL-parametre (asp-route-id og asp-route-deleteMobile).*@
                 <td><a asp-page="EditCustomer" asp-route-id="@item.Id">Edit</a></td>
                 <td><a asp-page="DeleteCustomer" asp-route-deleteMobile="@item.Mobile">Delete</a></td>
             </tr>
         }
     </tbody>
 </table>
-
-

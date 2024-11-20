@@ -21,9 +21,10 @@ namespace PizzaLibrary.Services
 
         public int Count { get { return _customers.Count; } }
 
+        // Tilføjer en kunde, hvis mobilnummer ikke allerede findes.
         public void AddCustomer(Customer customer)
         {
-            //TODO
+        
             if (!_customers.ContainsKey(customer.Mobile))
             { 
                 _customers.Add(customer.Mobile, customer); 
@@ -36,26 +37,36 @@ namespace PizzaLibrary.Services
             //return !_customers.ContainsKey(customer.Mobile) ? _customers.Add(customer.Mobile,customer) : null;
         }
 
+        // Henter alle kunder som en liste.
         public List<Customer> GetAll()
         {
-            //TODO
+        
            return _customers.Values.ToList();
         }
 
+        // Henter en kunde baseret på mobilnummer.
         public Customer? GetCustomerByMobile(string mobile)
         {
-            //TODO
-            //return _customers.ContainsKey(mobile) ? _customers[mobile] : null;
             if (mobile !=null && _customers.ContainsKey(mobile))
             {
                 return _customers[mobile];
             }
             return null;
         }
+        public Customer? GetCustomerById(int id)
+        {
+            foreach (var cus in _customers.Values)
+            {
+                if (cus.Id == id)
+                    return cus;
+            }
+            return null;
+
+        }
 
         public void PrintAllCustomers()
         {
-            //TODO
+       
             if (Count > 0)
                 foreach (var customer in _customers.Values)
                 {
@@ -88,21 +99,13 @@ namespace PizzaLibrary.Services
         {
            _customers.Remove(mobile);
         }
-       
+
+        // Returnerer alle kunder som en streng (til debugging).
         public override string ToString()
         {
-            //TODO is this nessecary, what does it do?
-            return base.ToString();
+            return string.Join(Environment.NewLine, _customers.Values.Select(c => c.ToString()));
         }
-        public Customer? GetCustomerById(int id)
-        {
-            foreach (var cus in _customers.Values)
-            {
-                if (cus.Id == id)
-                    return cus;
-            }
-            return null;
 
-        }
+       
     }
 }

@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PizzaLibrary.Interfaces;
 using PizzaLibrary.Models;
+using System.Diagnostics.Metrics;
+using System.Reflection;
 
 namespace UMLRazor.Pages.Customers
 {
@@ -9,6 +11,8 @@ namespace UMLRazor.Pages.Customers
     {
         private ICustomerRepository repo;
 
+        //Binder Customer-objektet til inputfelterne i formularen på Razor-siden.
+        //Når brugeren opdaterer oplysningerne, bliver Customer-objektet automatisk opdateret med de nye værdier.
         [BindProperty]
         public Customer Customer { get; set; }
 
@@ -21,12 +25,14 @@ namespace UMLRazor.Pages.Customers
         //[BindProperty]
         //public int Id { get; set; }
 
-
+        //Modtager en ICustomerRepository som parameter, så man kan bruge den til at tilgå og opdatere data om kunder.
         public EditCustomerModel(ICustomerRepository customerRepository)
         {
             this.repo = customerRepository;
         }
 
+        //Ved at bruge id parameteren hentes kunden fra ICustomerRepository via repo.GetCustomerById(id),
+        //og dataene bindes til Customer-modellen, som derefter vises i formularen.
         public IActionResult OnGet(int id)
         {
             Customer = repo.GetCustomerById(id);
@@ -47,7 +53,9 @@ namespace UMLRazor.Pages.Customers
             Customer = repo.GetCustomerById(id);
             return Page();
         }
-
+        //Denne metode bliver kaldt, når brugeren klikker på "Update" knappen i formularen
+        //Opdatering af kunden: Den opdaterede Customer bliver sendt til repo.UpdateCustomer(Customer), som opdaterer dataene i repositoryet.
+        //RedirectToPage("ShowCustomers"): brugeren sendes videre til "ShowCustomers"-siden
         public IActionResult OnPostEdit()
         {
             //if (!ModelState.IsValid)

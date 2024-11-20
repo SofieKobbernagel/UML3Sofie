@@ -5,30 +5,44 @@
 }
 <h1>Edit Customer</h1>
 
-<form method="post">
+@*<form>: Opretter en formular, der sender data til serveren, når brugeren klikker på en knap.
+method="post": Angiver, at data sendes via HTTP POST, hvilket betyder, at oplysningerne ikke vises i URL'en.
+enctype="multipart/form-data": Bruges til at kunne håndtere filuploads (som billeder).*@
+<form method="post" enctype="multipart/form-data">
 
     <div class="form-group">
         <label asp-for="@Model.Customer.Id" class="control-label"></label>
-        <input asp-for="@Model.Customer.Id" class="form-control" />
+        <input asp-for="@Model.Customer.Id" readonly class="form-control" />
        @*  <label asp-for="@Model.Id" class="control-label"></label>
         <input asp-for="@Model.Id" class="form-control" /> *@
     </div>
+
+    @*<label> og <input>: Vis en formular for at redigere kundens navn. 
+    Her bruges asp-for="@Model.Customer.Name" til at binde inputfeltet til Name-egenskaben i Customer-modellen.*@
     <div class="form-group">
         <label asp-for="@Model.Customer.Name" class="control-label"></label>
         <input asp-for="@Model.Customer.Name" class="form-control" />
     </div>
+    @*Brugt til at vise og redigere kundens adresse.*@
     <div class="form-group">
         <label asp-for="@Model.Customer.Address" class="control-label"></label>
         <input asp-for="@Model.Customer.Address" class="form-control" />
     </div>
+
+    @*Brugt til at vise mobilnummeret for kunden. Dette felt er readonly, 
+    så brugeren kan ikke ændre mobilnummeret. Det er kun til visning.*@
     <div class="form-group">
         <label asp-for="@Model.Customer.Mobile" class="control-label"></label>
         <input asp-for="@Model.Customer.Mobile" readonly class="form-control" />
     </div>
+
+    @*Denne knap bruges til at sende formularen. Når knappen trykkes, kaldes OnPost handleren, som vil opdatere kunden.*@
     <div class="formgroup">
         <input type="submit" asp-page-handler="Edit" value="Update" class="btn btn-primary" />
     </div>
 </form>
+
+@*Følgende link giver brugeren mulighed for at gå tilbage til listen*@
 <div>
     <a asp-page="Index">Back to List</a>
 </div> 

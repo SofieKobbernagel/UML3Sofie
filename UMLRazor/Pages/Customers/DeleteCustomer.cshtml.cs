@@ -23,6 +23,7 @@ namespace UMLRazor.Pages.Customers
             Customer = _repo.GetCustomerByMobile(deleteMobile);
         }
 
+        //OnPost-metode som sletter kunden baseret på mobilnummeret
         public IActionResult OnPost()
         {
             _repo.RemoveCustomer(Customer.Mobile);

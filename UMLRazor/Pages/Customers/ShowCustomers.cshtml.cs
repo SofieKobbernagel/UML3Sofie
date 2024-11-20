@@ -10,7 +10,7 @@ namespace UMLRazor.Pages.Customers
         private ICustomerRepository _customerRepository;
 
         public List<Customer> Customers { get; private set; }
-       
+
         public ShowCustomersModel(ICustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;

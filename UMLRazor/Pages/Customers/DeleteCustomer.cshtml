@@ -3,31 +3,41 @@
 @{
     ViewData["Title"] = "Delete Customer";
 }
+@* Denne overskrift viser titlen "Delete Customer" på siden. *@
 <h1>Delete Customer</h1>
-            
+
+@* Følgende betyder at formularen bruger POST-metoden, hvilket betyder,
+   at når brugeren klikker på "Delete"-knappen, sendes en anmodning til 
+   serveren for at slette den valgte kunde. *@
 <form method="post">
+   @*  Disse inputfelter viser oplysninger om den kunde, der skal slettes (navn, adresse og mobilnummer). *@
             <div class="form-group">
                 <label asp-for="@Model.Customer.Name" class="control-label"></label>
-                <input asp-for="@Model.Customer.Name" class="form-control" />
+                <input asp-for="@Model.Customer.Name" class="form-control" readonly/>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Customer.Address" class="control-label"></label>
-                <input asp-for="@Model.Customer.Address" class="form-control" />
+                <input asp-for="@Model.Customer.Address" class="form-control" readonly/>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Customer.Mobile" class="control-label"></label>
-                <input asp-for="@Model.Customer.Mobile" class="form-control" />
+                <input asp-for="@Model.Customer.Mobile" class="form-control" readonly/>
             </div>
+   
+            @*  Dette inputfelt viser om kunden er et klubmedlem eller ej *@
             <div class="form-group">
                 <label asp-for="@Model.Customer.ClubMember" class="control-label"></label>
                 @* <input asp-for="@Model.Customer.ClubMember" class="form-control"></input> *@
                 <input value="@(Model.Customer.ClubMember?"Er medlem":"Ikke medlem")" class="form-control"></input>
             </div>
+
+            @* Denne knap sender formularen og udfører OnPost()-metoden, som skal håndtere sletningen af kunden. *@
             <div class="formgroup">
                 <input type="submit" value="Delete" class="btn btn-primary" />
             </div>
 </form>
-    <div>
+@* Denne linje giver et link tilbage til listen over kunder. asp-page="Index" betyder, at den leder brugeren til Index-siden *@
+<div>
         <a asp-page="Index">Back to List</a>
     </div>
 </div>

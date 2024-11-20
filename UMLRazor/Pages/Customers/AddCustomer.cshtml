@@ -4,10 +4,16 @@
     ViewData["Title"] = "Add Customer";
 }
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
+    @* Følgende formularen indeholder inputfelter, som er bundet til egenskaberne 
+        i Customer-modellen via asp-for-tagget. Når formularen bliver sendt, vil 
+        værdierne, som brugeren har indtastet, blive brugt til at opdatere 
+        Customer-objektet i AddCustomerModel-klassen.*@
     <div class="form-group">
+        <div asp-validation-summary="All" class="text-danger"></div>
         <label asp-for="@Model.Customer.Name" class="control-label"></label>
         <input asp-for="@Model.Customer.Name" class="form-control" />
+        <span asp-validation-for="Customer.Name" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="@Model.Customer.Mobile" class="control-label"></label>
@@ -17,8 +23,21 @@
         <label asp-for="@Model.Customer.Address" class="control-label"></label>
         <input asp-for="@Model.Customer.Address" class="form-control" />
     </div>
+   @* Følgwnsw felt tillader brugeren at uploade et billede sammen med kundens oplysninger.
+      Feltet er bundet til Photo-egenskaben i AddCustomerModel-klassen.
+      Filen bliver uploadet til serveren og gemt i en bestemt mappe via ProcessUploadedFile()-metoden i AddCustomerModel.
+   *@
+    <div class="form-group">
+        <label asp-for="@Model.Photo" class="control-label"></label>
+        <div class="custom-file">
+            <input asp-for="@Model.Photo" class="custom-file-input form-control" />
+        </div>
+    </div>
+
+   @*  Følgende er en submit knap.
+       Denne knap sender formularen, hvilket resulterer i en POST-anmodning til serveren. 
+       Hvis alle felter er korrekt udfyldt, bliver kundens oplysninger gemt i databasen, og billedet uploades. *@
     <div class="formgroup">
-        <label asp-for="@Model.Customer.Name" class="control-label"></label>
         <input type="submit" value="Create Customer" class="btn btn-primary" />
     </div>
 </form>
