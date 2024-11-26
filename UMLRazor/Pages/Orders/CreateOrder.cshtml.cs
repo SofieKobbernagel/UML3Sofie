@@ -11,7 +11,7 @@ namespace UMLRazor.Pages.Orders
     {
         private ICustomerRepository _cRepo;
         private IMenuItemRepository _mRepo;
-        private IShoppingBasket _shoppingBasket;
+        
         [BindProperty]
         public string SearchCustomerMobile { get; set; }
 
@@ -21,7 +21,7 @@ namespace UMLRazor.Pages.Orders
 
         public List<OrderLine> OrderLines { get; set; }
 
-        public ShoppingBasket ShoppingBasket { get; set; }
+        public IShoppingBasket ShoppingBasket { get; set; }
 
         [BindProperty]
         public int ChosenMenuItem { get; set; }
@@ -39,9 +39,9 @@ namespace UMLRazor.Pages.Orders
         {
             _cRepo = customerRepository;
             _mRepo = menuItemRepository;
-            _shoppingBasket = shoppingBasket;
+            ShoppingBasket = shoppingBasket;
             createMenuSelectList();
-            _shoppingBasket = shoppingBasket;
+           
         }
 
         private void createMenuSelectList()
