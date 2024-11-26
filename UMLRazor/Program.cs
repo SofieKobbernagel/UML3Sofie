@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<ICustomerRepository, CustomerRepository>();
+builder.Services.AddSingleton<IMenuItemRepository, MenuItemRepository>();
+builder.Services.AddSingleton<IShoppingBasket, ShoppingBasket>();
 
 var app = builder.Build();
 

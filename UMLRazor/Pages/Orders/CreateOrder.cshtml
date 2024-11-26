@@ -1,0 +1,63 @@
+﻿@page
+@model UMLRazor.Pages.Orders.CreateOrderModel
+@{
+    ViewData["Title"] = "createOrder";
+
+}
+<h1>Select Customer</h1>
+
+<form methode="post" asp-page-handler="Customer">
+<p>
+    Mobile: <input type="text" asp-for="SearchCustomerMobile"/>
+    <input type="submit" value="Search customer"/>
+</p>
+</form>
+
+@{
+    if(@Model.TheCustomer !=null)
+    {
+        <h3>@Model.TheCustomer.Name</h3>
+        <h3>@Model.TheCustomer.Mobile</h3>
+    }
+}
+<h1>Add MenuItem to Order</h1>
+<form method="post" asp-page-handler="AddToOrder">
+    <label>MenuItems</label>
+    <select id="ChosenMenuItem" name="ChosenMenuItem" 
+    asp-for="@Model.ChosenMenuItem"
+    asp-items="@Model.MenuItemSelectList"> 
+
+    </select>
+    <input type="number" asp-for="@Model.Amount"/>
+    <textarea asp-for="@Model.Comment" cols="120"> 
+    </textarea>
+    <input type="submit" value="AddToOrder"/>
+    @*Opretter en tabel, som viser oplysninger om alle menuitems. Tabelhovedet (<thead>) indeholder kolonneoverskrifter som ID, navn og pris.*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Amount</th>
+            <th>MenuItem</th>
+            <th>Price</th>
+            <th>Comment</th>
+
+        </tr>
+    </thead>
+    @*Dynamisk indhold: Ved hjælp af @foreach-loopet itereres gennem alle kunder i Model.Customers. 
+    For hver kunde oprettes en ny række (<tr>) med data om kunden i celler (<td>).*@
+    <tbody>
+        @foreach (var item in Model.ShoppingBasket.GetAll())
+        {
+            <tr>
+                <td>@item.Amount</td>
+                <td>@item.MenuItem.Name</td>
+                <td>@item.SubTotal()</td>
+                <td>@item.Comment</td>
+             
+             @*Rediger og Slet Links: For hver menuitem er der links til at redigere og slette menuitem. 
+                Linksene bruger asp-page til at navigere til de relevante sider*@
+                <td><a asp-page="DeleteMenuItem" asp-route-deleteMobile="@item.MenuItem">Delete</a></td>
+            </tr>
+        }
+ </table>
+</form>
